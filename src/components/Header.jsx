@@ -19,24 +19,22 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full bg-pink-500 text-white shadow-lg z-50">
-      <div className="container mx-auto flex items-center justify-between p-4">
+      <div className="container mx-auto flex items-center justify-between p-4 relative">
         <Link to={'/'}>
           <h1 className="text-2xl font-bold">Happy Birthday 🎂</h1>
         </Link>
 
+        {/* Mobile toggle button */}
         <button
-          className="md:hidden text-3xl"
+          className="md:hidden text-3xl relative"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
           {open ? '✖' : '☰'}
         </button>
 
-        <ul
-          className={`absolute md:static top-16 left-0 w-full md:w-auto bg-pink-500 md:bg-transparent flex flex-col md:flex-row gap-6 p-6 md:p-0 transition-all duration-300 ${
-            open ? 'block' : 'hidden md:flex'
-          }`}
-        >
+        {/* Desktop nav */}
+        <ul className="hidden md:flex gap-6">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -50,6 +48,26 @@ const Header = () => {
             <NavLink to="/apology">Apology</NavLink>
           </li>
         </ul>
+      </div>
+
+      {/* Mobile Popup Menu BELOW toggle button */}
+      <div className="md:hidden relative">
+        {open && (
+          <ul className="absolute right-1 mt-1 bg-gradient-to-br from-pink-400 via-purple-400 to-pink-200 rounded-xl shadow-lg p-4 flex flex-col gap-3 w-48 animate-fadeIn z-50">
+            <li>
+              <NavLink to="/">🎉 Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/gallery">🎈 Gallery</NavLink>
+            </li>
+            <li>
+              <NavLink to="/wishes">🎁 Wishes</NavLink>
+            </li>
+            <li>
+              <NavLink to="/apology">💌 Apology</NavLink>
+            </li>
+          </ul>
+        )}
       </div>
     </header>
   )
